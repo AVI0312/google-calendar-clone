@@ -2,8 +2,7 @@
 
 A high-fidelity fullstack clone of Google Calendar built with React, Node.js, Express, and PostgreSQL.
 
-**Created by:** Arpit  
-**Repository:** https://github.com/Naman-Bhalla/ | https://github.com/raun/
+**Created by:** Arpit Panwar
 
 ---
 
