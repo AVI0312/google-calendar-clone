@@ -1,0 +1,269 @@
+.week-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.week-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Allow first label (12 AM) to render over the top grid line */
+  overflow: visible;
+}
+
+.week-header {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 1fr);
+  border-bottom: 1px solid #dadce0;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.week-time-column-header {
+  border-right: 1px solid #dadce0;
+}
+
+.week-header-cell {
+  padding: 16px 8px;
+  text-align: center;
+  border-right: 1px solid #dadce0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.week-header-cell.today {
+  background-color: #e8f0fe;
+}
+
+.week-day-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: #70757a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.week-day-number {
+  font-size: 24px;
+  font-weight: 400;
+  color: #3c4043;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.week-day-number.today-number {
+  background-color: #1a73e8;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.week-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  overflow-y: auto;
+  position: relative;
+  align-items: start;
+}
+
+.week-time-column {
+  border-right: 1px solid #dadce0;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  /* Draw aligned horizontal lines every 48px */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #f1f3f4,
+    #f1f3f4 1px,
+    transparent 1px,
+    transparent 48px
+  );
+}
+
+.week-time-slot {
+  height: 48px;
+  border-bottom: none; /* lines from column background */
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.week-time-slot:first-child {
+  border-top: none; /* top line from column background */
+}
+
+.week-time-label {
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  font-size: 10px;
+  color: #70757a;
+  background-color: #ffffff;
+  padding: 0 4px;
+  line-height: 1;
+  z-index: 1;
+}
+
+/* Keep the first label (12 AM) inside the scroll container so it doesn't get clipped */
+.week-time-slot:first-child .week-time-label {
+  top: 0;
+}
+
+.week-days-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.week-day-column {
+  border-right: 1px solid #dadce0;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  /* Mirror same grid to stay perfectly aligned */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #f1f3f4,
+    #f1f3f4 1px,
+    transparent 1px,
+    transparent 48px
+  );
+}
+
+.week-day-column:last-child {
+  border-right: none;
+}
+
+.week-day-slot {
+  height: 48px;
+  border-bottom: none; /* lines from column background */
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.week-day-slot:first-child {
+  border-top: none; /* top line from column background */
+}
+
+.week-day-slot:hover {
+  background-color: #f8f9fa;
+}
+
+.week-events-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.week-event {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #ffffff;
+  cursor: pointer;
+  pointer-events: all;
+  overflow: hidden;
+  transition: all 0.2s;
+  border-left: 3px solid;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.week-event:hover {
+  opacity: 0.9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.week-event-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.week-event-title {
+  font-size: 12px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.week-event-time {
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+/* Scrollbar styling for week view */
+.week-body::-webkit-scrollbar {
+  width: 12px;
+}
+
+.week-body::-webkit-scrollbar-track {
+  background: #f1f3f4;
+}
+
+.week-body::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 6px;
+}
+
+.week-body::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6;
+}
+
+@media (max-width: 768px) {
+  .week-header {
+    grid-template-columns: 60px repeat(7, 1fr);
+  }
+
+  .week-body {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .week-day-number {
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .week-time-label {
+    font-size: 9px;
+  }
+
+  .week-event {
+    left: 2px;
+    right: 2px;
+    padding: 2px 4px;
+  }
+
+  .week-event-title {
+    font-size: 10px;
+  }
+
+  .week-event-time {
+    font-size: 9px;
+  }
+}

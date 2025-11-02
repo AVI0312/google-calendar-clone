@@ -1,0 +1,262 @@
+.day-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.day-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Allow first label (12 AM) to render over the top grid line */
+  overflow: visible;
+}
+
+.day-header {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  border-bottom: 1px solid #dadce0;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.day-time-column-header {
+  border-right: 1px solid #dadce0;
+}
+
+.day-header-cell {
+  padding: 16px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.day-header-cell.today {
+  background-color: #e8f0fe;
+}
+
+.day-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #70757a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.day-number {
+  font-size: 48px;
+  font-weight: 400;
+  color: #3c4043;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.day-number.today-number {
+  background-color: #1a73e8;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.day-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  overflow-y: auto;
+  position: relative;
+  align-items: start;
+}
+
+.day-time-column {
+  border-right: 1px solid #dadce0;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  /* Draw aligned horizontal lines every 48px */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #f1f3f4,
+    #f1f3f4 1px,
+    transparent 1px,
+    transparent 48px
+  );
+}
+
+.day-time-slot {
+  height: 48px;
+  border-bottom: none; /* lines from column background */
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.day-time-slot:first-child {
+  border-top: none; /* top line from column background */
+}
+
+.day-time-label {
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  font-size: 10px;
+  color: #70757a;
+  background-color: #ffffff;
+  padding: 0 4px;
+  line-height: 1;
+  z-index: 1;
+}
+
+/* Keep the first label (12 AM) visible and aligned to the top line */
+.day-time-slot:first-child .day-time-label {
+  top: 0;
+}
+
+.day-content-column {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  /* Mirror the same grid as time column */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #f1f3f4,
+    #f1f3f4 1px,
+    transparent 1px,
+    transparent 48px
+  );
+}
+
+.day-content-slot {
+  height: 48px;
+  border-bottom: none; /* lines from column background */
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.day-content-slot:first-child {
+  border-top: none; /* top line from column background */
+}
+
+.day-content-slot:hover {
+  background-color: #f8f9fa;
+}
+
+.day-events-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  padding: 0 16px;
+}
+
+.day-event {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #ffffff;
+  cursor: pointer;
+  pointer-events: all;
+  overflow: hidden;
+  transition: all 0.2s;
+  border-left: 4px solid;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.day-event:hover {
+  opacity: 0.9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: translateX(4px);
+  z-index: 10;
+}
+
+.day-event-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day-event-time {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.day-event-title {
+  font-size: 16px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.day-event-location {
+  font-size: 12px;
+  opacity: 0.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Scrollbar styling */
+.day-body::-webkit-scrollbar {
+  width: 12px;
+}
+
+.day-body::-webkit-scrollbar-track {
+  background: #f1f3f4;
+}
+
+.day-body::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 6px;
+}
+
+.day-body::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6;
+}
+
+@media (max-width: 768px) {
+  .day-header {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .day-body {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .day-header-cell {
+    padding: 12px;
+  }
+
+  .day-number {
+    font-size: 36px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .day-event {
+    left: 8px;
+    right: 8px;
+    padding: 6px 8px;
+  }
+
+  .day-event-title {
+    font-size: 14px;
+  }
+}

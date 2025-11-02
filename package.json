@@ -1,0 +1,19 @@
+{
+  "name": "google-calendar-clone",
+  "version": "1.0.0",
+  "description": "A high-fidelity Google Calendar clone built with React, Node.js, and PostgreSQL",
+  "scripts": {
+    "install-all": "cd backend && npm install && cd ../frontend && npm install",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm start",
+    "init-db": "cd backend && npm run init-db",
+    "start": "npm run backend & npm run frontend"
+  },
+  "keywords": ["calendar", "google-calendar", "react", "nodejs", "postgresql"],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/google-calendar-clone"
+  }
+}
